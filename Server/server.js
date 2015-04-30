@@ -22,7 +22,6 @@ wss.on('connection', function connection(ws) {
 
 	sendMessage(ws, 'Connected to the server! ClientIndex: ' +(clientIndex-1));
   	connections.push(ws);
-
 });
 
 
