@@ -2,19 +2,18 @@
 
 function WebSocketServerImpl() {
     var WebSocketServer = require('ws').Server,
-        eventStream = require('./EventStream'),
-        port = 1337,
-
-        wss = new WebSocketServer({
-            port: port
+        _eventStream = require('./EventStream'),
+        _port = 1337,
+        _wss = new WebSocketServer({
+            port: _port
         });
-    if (wss) {
-        console.log('Server started on port: ' + port);
+    if (_wss) {
+        console.log('Server started on port: ' + _port);
     } else {
         new Error('Could not start server!');
     }
-    wss.on('connection', function connection(ws) {
-        eventStream.emit('new-connection', ws);
+    _wss.on('connection', function connection(ws) {
+        _eventStream.emit('new-connection', ws);
     });
 
 };

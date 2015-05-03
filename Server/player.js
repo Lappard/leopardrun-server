@@ -1,40 +1,52 @@
 'use strict';
 
-function Player (_socket, _guid){
-	var position = null,
-		name = 'unnamed',
-		room = null,
-		socket = _socket,
-		eventStream = require('./EventStream'),
-		guid = _guid,
-		is_ready = false, 
-		active = true,
-		self = this;
+function Player (socket, guid){
+	var _position = null,
+		_name = 'unnamed',
+		_roomId = null,
+		_socket = _socket,
+		_eventStream = require('./EventStream'),
+		_guid = _guid,
+		_isReady = false, 
+		_active = true,
+		_self = this;
 
-	socket.on('message', function(data){
+	_socket.on('message', function(data){
 		try{
 			var data = JSON.parse(data);
+			if(data.method){
+				switch(data.method){
+					case "join room": 
+						// emit room join
+						// don't broadcast
+						break;
+
+
+				}
+			}
+			_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
 		}catch(e){
-			//data is not a object
+			//data is not a object send string then..
+			_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
 		}
-		eventStream.emit('leopart-braodcast', {sender: self, message:data});
+		
 	});
 
-	socket.on('close',function(){
+	_socket.on('close',function(){
 		//TODO: handle reconnection
-		active = false;
+		_active = false;
 	});
 
 	this.send = function(data){
-		socket.send(JSON.stringify(data));
+		_socket.send(JSON.stringify(data));
 	};
 
 	this.getGuid = function(){
-		return guid;
+		return _guid;
 	};
 
 	this.isActive = function(){
-		return active;
+		return _active;
 	};
 
 

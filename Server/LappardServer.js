@@ -6,19 +6,17 @@ var HashMap = require('./Util/HashMap'),
 
 
 function LappardServer() {
-    var connections = new HashMap(),
-        clientIndex = 0,
-        port = 1337,
-        eventStream = require('./EventStream'),
-        chance = new Chance();
+    var _connections = new HashMap(),
+        _eventStream = require('./_EventStream'),
+        _chance = new Chance();
 
-    eventStream.on('new-connection', function(ws) {
-        var guid = chance.guid();
+    _eventStream.on('new-connection', function(ws) {
+        var guid = _chance.guid();
         // check if client connection is ok
         // check if clinet has a valid guid for reconnection!!
         if (true) {
             ws.send(JSON.stringify({guid:guid}));
-            connections.put(guid, new Player(ws, guid));
+            _connections.put(guid, new Player(ws, guid));
         }
     });
 
@@ -27,10 +25,10 @@ function LappardServer() {
      * @param  {[type]}
      * @return {[type]}     
      */
-    eventStream.on('leopart-braodcast', function(data) {
+    _eventStream.on('leopart-broadcast', function(data) {
         if (data.sender && data.message) {
             var response = {senderGuid:data.sender.getGuid(), message: data.message};
-            connections.each(function(index, key, item) {
+            _connections.each(function(index, key, item) {
                 if (item.getGuid() !== data.sender.getGuid() && item.isActive()) {
                     item.send(response);
                 }
