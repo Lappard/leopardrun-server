@@ -4,7 +4,7 @@ function Player (socket, guid){
 	var _position = null,
 		_name = 'unnamed',
 		_roomId = null,
-		_socket = _socket,
+		_socket = socket,
 		_eventStream = require('./EventStream'),
 		_guid = _guid,
 		_isReady = false, 
