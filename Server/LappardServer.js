@@ -7,7 +7,7 @@ var HashMap = require('./Util/HashMap'),
 
 function LappardServer() {
     var _connections = new HashMap(),
-        _eventStream = require('./_EventStream'),
+        _eventStream = require('./EventStream'),
         _chance = new Chance();
 
     _eventStream.on('new-connection', function(ws) {

@@ -1,21 +1,21 @@
 var EventStream = function EventStream(){
     //defining a var instead of this (works for variable & function) will create a private definition
-    var listeners = {};
+    var _listeners = {};
  
     this.emit = function (event, data) {
-		if (listeners[event] != undefined) {
-			listeners[event].forEach(function (entry) {
+		if (_listeners[event] != undefined) {
+			_listeners[event].forEach(function (entry) {
 				entry(data);
 			});
 		}
 	};
  
     this.on = function (event, callback) {
-		if (listeners[event] != undefined) {
-			listeners[event].push(callback);
+		if (_listeners[event] != undefined) {
+			_listeners[event].push(callback);
 		} else {
-			listeners[event] = [];
-			listeners[event].push(callback);
+			_listeners[event] = [];
+			_listeners[event].push(callback);
 		}
 	};
  
