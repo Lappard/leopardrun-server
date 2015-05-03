@@ -1,24 +1,43 @@
 'use strict';
-module.exports = {
-	Player: function (_x, _y, _name, _socket){
-		this.position = null;
-		this.name = _name;
-		this.room = null;
-		this.socket = _socket;
-		this.is_ready = false;
-		
-		
-		this.Ready = function(){
-			if (this.room != null){
-				this.is_ready = true;
-			}
-		};
-		
-		this.Cancel = function(){
-			if (this.room != null){
-				this.is_ready = false;
-			}		
-		};
-	
-	}
+
+function Player (_socket, _guid){
+	var position = null,
+		name = 'unnamed',
+		room = null,
+		socket = _socket,
+		eventStream = require('./EventStream'),
+		guid = _guid,
+		is_ready = false, 
+		active = true,
+		self = this;
+
+	socket.on('message', function(data){
+		try{
+			var data = JSON.parse(data);
+		}catch(e){
+			//data is not a object
+		}
+		eventStream.emit('leopart-braodcast', {sender: self, message:data});
+	});
+
+	socket.on('close',function(){
+		//TODO: handle reconnection
+		active = false;
+	});
+
+	this.send = function(data){
+		socket.send(JSON.stringify(data));
+	};
+
+	this.getGuid = function(){
+		return guid;
+	};
+
+	this.isActive = function(){
+		return active;
+	};
+
+
 };
+
+module.exports = Player

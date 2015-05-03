@@ -1,4 +1,3 @@
 'use strict';
-var LappardServer = require('./LappardServer');
-var Server = new (LappardServer);
-Server.start();
+var WebSocketServerImpl = require('./WebSocketServerImpl'),
+	LappardServer = require('./LappardServer');

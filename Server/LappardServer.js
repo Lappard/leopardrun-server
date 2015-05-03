@@ -1,47 +1,46 @@
 'use strict';
-var HashMap = require('./Util/HashMap');
-var WebSocketServer = require('ws').Server;
+var HashMap = require('./Util/HashMap'),
+ 	Player = require('./Player'),
+ 	Chance = require('chance');
 
 
-function LappardServer(){
-	this.connections = new HashMap();
-	this.clientIndex = 0;
-	this.wss = new WebSocketServer({ port: 1337 });
+
+function LappardServer() {
+    var connections = new HashMap(),
+        clientIndex = 0,
+        port = 1337,
+        eventStream = require('./EventStream'),
+        chance = new Chance();
+
+    eventStream.on('new-connection', function(ws) {
+        var guid = chance.guid();
+        // check if client connection is ok
+        // check if clinet has a valid guid for reconnection!!
+        if (true) {
+            ws.send(JSON.stringify({guid:guid}));
+            connections.put(guid, new Player(ws, guid));
+        }
+    });
+
+    /**
+     * [description]
+     * @param  {[type]}
+     * @return {[type]}     
+     */
+    eventStream.on('leopart-braodcast', function(data) {
+        if (data.sender && data.message) {
+            var response = {senderGuid:data.sender.getGuid(), message: data.message};
+            connections.each(function(index, key, item) {
+                if (item.getGuid() !== data.sender.getGuid() && item.isActive()) {
+                    item.send(response);
+                }
+            });
+        } else {
+        	new Error('object need message and sender attribute');
+        }
+    });
 };
 
-LappardServer.prototype.start = function(){
-	if(this.wss){
-		console.log('Server started on port: '+ this.wss.port);
-	}
-	
-	//anonyme functions got own this scope
-	var that = this;
-	this.wss.on('connection', function connection(ws) {
-		ws.clientIndex = that.clientIndex++;
-		
-		
-		ws.on('message', function incoming(message) {
-			that.connections.each(function(index,key,conn){
-				if(ws !== conn){
-					that.sendMessageTo(conn,'von clientNr: ' + ws.clientIndex + ': ' +message);
-				}
-			});
-		});
-		
-		that.sendMessageTo(ws, 'Connected to the server! ClientIndex: ' +(that.clientIndex-1));
-		that.connections.put(ws.clientIndex,ws);
-	});
-};
-
-LappardServer.prototype.sendMessageTo = function(connection, msg) {
-	try { 
-		connection.send(msg); 
-	} catch (e) {
-		console.log(e);
-		this.connections.remove(connection);
-	 }
-};
 
 
-
-module.exports = LappardServer;
+module.exports = new LappardServer();

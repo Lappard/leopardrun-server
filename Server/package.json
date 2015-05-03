@@ -1,10 +1,13 @@
 {
   "name": "lappartserver",
   "version": "0.0.2",
-    "devDependencies": {
-        "grunt": "~0.4.2",
-        "ws": "~0.7.1",
-        "pm2": "~v0.12.13",
-        "nodemon":"~v1.3.7"
-    }
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "ws": "~0.7.1",
+    "pm2": "~v0.12.13",
+    "nodemon": "~v1.3.7"
+  },
+  "dependencies": {
+    "chance": "^0.7.4"
+  }
 }
