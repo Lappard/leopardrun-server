@@ -6,7 +6,7 @@ function Player (socket, guid){
 		_roomId = null,
 		_socket = socket,
 		_eventStream = require('./EventStream'),
-		_guid = _guid,
+		_guid = guid,
 		_isReady = false, 
 		_active = true,
 		_self = this;
