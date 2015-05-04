@@ -30,4 +30,4 @@ node_modules
 .settings
 .idea
 
-Server/cert
+Server/cert/*.key

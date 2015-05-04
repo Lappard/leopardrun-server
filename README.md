@@ -9,9 +9,7 @@ Server URL: ws://jonathanwiemers.de:1337
 ```
 cd Server
 node install
-mkdir cert
-cd cert
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ssl.key -out ssl.crt
+// get ssl.key by asking ;)
 cd ..
 node server.js
 //or (for run in background)
