@@ -1,3 +1,4 @@
+'use strict';
 var EventStream = function EventStream(){
     //defining a var instead of this (works for variable & function) will create a private definition
     var _listeners = {};
@@ -18,10 +19,7 @@ var EventStream = function EventStream(){
 			_listeners[event].push(callback);
 		}
 	};
- 
-    if(EventStream.caller != EventStream.getInstance){
-        throw new Error("This object cannot be instanciated");
-    }
+
 }
  
 /* ************************************************************************

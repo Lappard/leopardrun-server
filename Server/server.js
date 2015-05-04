@@ -1,3 +1,3 @@
 'use strict';
 var WebSocketServerImpl = require('./WebSocketServerImpl'),
-	LappardServer = require('./LappardServer');
+	LeopardRunServer = require('./LeopardRunServer');
