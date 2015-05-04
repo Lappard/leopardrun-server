@@ -11,6 +11,7 @@ function Player (socket, guid){
 		_active = true,
 		_self = this;
 
+
 	_socket.on('message', function(data){
 		try{
 			var data = JSON.parse(data);
@@ -36,6 +37,7 @@ function Player (socket, guid){
 		//TODO: handle reconnection
 		_active = false;
 	});
+
 
 	this.send = function(data){
 		_socket.send(JSON.stringify(data));
