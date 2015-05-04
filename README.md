@@ -1,8 +1,12 @@
 # leopartrun-server
 
+```
 Server URL: ws://jonathanwiemers.de:1337
+```
 
-````
+## installing
+
+```
 cd Server
 node install
 mkdir cert
