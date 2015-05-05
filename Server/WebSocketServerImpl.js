@@ -13,21 +13,21 @@ function WebSocketServerImpl() {
 
     var httpServ = require('https');
     var app = null;
-    var processRequest = function(req, res) {
-        console.log("Request received.");
-        var body = 'hello world';
-        res.statusCode = 404;
-        res.end();
-    };
-    app = httpServ.createServer({
-        key: fs.readFileSync(ws_cfg.ssl_key),
-        cert: fs.readFileSync(ws_cfg.ssl_cert)
-    }, processRequest).listen(ws_cfg.port);
+    //var processRequest = function(req, res) {
+    //    console.log("Request received.");
+    //    var body = 'hello world';
+    //    res.statusCode = 404;
+    //    res.end();
+    //};
+    //app = httpServ.createServer({
+    //    key: fs.readFileSync(ws_cfg.ssl_key),
+    //    cert: fs.readFileSync(ws_cfg.ssl_cert)
+    //}, processRequest).listen(ws_cfg.port);
 
     var WebSocketServer = require('ws').Server,
         _eventStream = require('./EventStream'),
         _wss = new WebSocketServer({
-            server: app
+            port: ws_cfg.port
         });
     if (_wss) {
         console.log('Server started on port: ' + ws_cfg.port);
