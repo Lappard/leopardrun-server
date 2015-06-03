@@ -57,7 +57,7 @@ function Player (socket, guid){
 	this.generateLevel = function () {
 		_level = require("/Level");
 		var data = {
-			data = _level.create()
+			data : _level.create()
 		}
 		this.send(data);
 	}
