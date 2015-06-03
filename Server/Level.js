@@ -19,16 +19,13 @@ function Level(){
     };
     
     var _createLevelPart = function () {
-        //return [
-        //    {"type":"g","x":0,"y":0},
-        //    {"type":"b","x":0,"y":1},
-        //    {"type":"b","x":2,"y":2},
-        //    {"type":"b","x":3,"y":1},
-        //    {"type":"b","x":5,"y":3}
-        //]; Math.floor(Math.random() * 3) + 1
-
-
-
+        return [
+            {"type":"g","x":0,"y":0},
+            {"type":"b","x":0,"y":1},
+            {"type":"b","x":2,"y":2},
+            {"type":"b","x":3,"y":1},
+            {"type":"b","x":5,"y":3}
+        ]; //Math.floor(Math.random() * 3) + 1
     };
 }
 

@@ -23,7 +23,7 @@ function Player (socket, guid){
 						// emit room join
 						// don't broadcast
 						break;
-					case "create level":
+					case "createLevel":
 						_self.generateLevel();
 						break;
 				}
