@@ -10,15 +10,15 @@ function Player (socket, guid){
 		_isReady = false, 
 		_active = true,
 		_self = this,
-		_level = null;
-
+		_level = null,
+		_lastData = null;
 
 	_socket.on('message', function(data){
 		try{
 			console.log(data);
-			var data = JSON.parse(data);
-			if(data.method){
-				switch(data.method){
+			_lastData = JSON.parse(data);
+			if(_lastData.method){
+				switch(_lastData.method){
 					case "join room": 
 						// emit room join
 						// don't broadcast
@@ -57,10 +57,10 @@ function Player (socket, guid){
 	
 	this.generateLevel = function () {
 		_level = require("./Level");
-		var data = {
-			data : _level.create()
+		_lastData.process = {
+			level : _level.create()
 		}
-		this.send(data);
+		this.send(_lastData);
 	}
 
 
