@@ -10,7 +10,7 @@ function Level(){
 
     this.create = function () {
         var result = {
-            levelparts = []
+            levelparts: []
         };
         for (var i = 0; i < 10; ++i){
             result.levelparts.push(_createLevelPart())
@@ -19,7 +19,7 @@ function Level(){
     };
     
     var _createLevelPart = function () {
-        return result = [
+        return [
             {"type":"g","x":0,"y":0},
             {"type":"b","x":0,"y":1},
             {"type":"b","x":2,"y":2},
@@ -31,4 +31,4 @@ function Level(){
 
 
 
-module.exports = new LevelCreator();
+module.exports = new Level();

@@ -24,7 +24,7 @@ function Player (socket, guid){
 						// don't broadcast
 						break;
 					case "create level":
-						this.generateLevel();
+						_self.generateLevel();
 						break;
 				}
 			}
@@ -56,7 +56,7 @@ function Player (socket, guid){
 	
 	
 	this.generateLevel = function () {
-		_level = require("/Level");
+		_level = require("./Level");
 		var data = {
 			data : _level.create()
 		}
