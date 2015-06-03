@@ -11,7 +11,7 @@ function LeopardRunServer() {
         _chance = new Chance();
 
     _eventStream.on('new-connection', function(ws) {
-        console.log('ws connection');
+        console.log(new Date().toISOString(),'ws connection');
         var guid = _chance.guid();
         // check if client connection is ok
         // check if clinet has a valid guid for reconnection!!
