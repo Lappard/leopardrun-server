@@ -15,7 +15,7 @@ function Player (socket, guid){
 
 	_socket.on('message', function(data){
 		try{
-			console.log(data);
+			console.log(new Date().toISOString(),data);
 			_lastData = JSON.parse(data);
 			if(_lastData.method){
 				switch(_lastData.method){
