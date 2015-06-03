@@ -19,7 +19,7 @@ function Player (socket, guid){
 			_lastData = JSON.parse(data);
 			if(_lastData.method){
 				switch(_lastData.method){
-					case "join room": 
+					case "joinRoom":
 						// emit room join
 						// don't broadcast
 						break;
@@ -28,10 +28,10 @@ function Player (socket, guid){
 						break;
 				}
 			}
-			_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
+			//_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
 		}catch(e){
 			//data is not a object send string then..
-			_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
+			//_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
 		}
 		
 	});
