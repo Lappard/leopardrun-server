@@ -9,7 +9,8 @@ function Player (socket, guid){
 		_guid = guid,
 		_isReady = false, 
 		_active = true,
-		_self = this;
+		_self = this,
+		_level = null;
 
 
 	_socket.on('message', function(data){
@@ -21,8 +22,9 @@ function Player (socket, guid){
 						// emit room join
 						// don't broadcast
 						break;
-
-
+					case "create level":
+						this.generateLevel();
+						break;
 				}
 			}
 			_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
@@ -50,6 +52,15 @@ function Player (socket, guid){
 	this.isActive = function(){
 		return _active;
 	};
+	
+	
+	this.generateLevel = function () {
+		_level = require("/Level");
+		var data = {
+			data = _level.create()
+		}
+		this.send(data);
+	}
 
 
 };
