@@ -1,5 +1,7 @@
 'use strict';
 
+var Chance = require('chance');
+
 /**
  *
  *
@@ -43,13 +45,9 @@ function Level(){
             }
 
         }
-
-
-
-
         _level.push(result);
 
-        return result //Math.floor(Math.random() * 3) + 1
+        return result;
     };
 }
 
