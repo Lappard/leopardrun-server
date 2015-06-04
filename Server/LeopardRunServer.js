@@ -38,6 +38,11 @@ function LeopardRunServer() {
         	new Error('object need message and sender attribute');
         }
     });
+    
+    
+    _eventStream.on('remove-player', function (guid) {
+        _connections.removeKey(guid);
+    });
 };
 
 

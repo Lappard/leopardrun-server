@@ -40,6 +40,7 @@ function Player(socket, guid) {
     _socket.on('close', function () {
         //TODO: handle reconnection
         _active = false;
+        _eventStream.emit('remove-player',_guid);
     });
 
 

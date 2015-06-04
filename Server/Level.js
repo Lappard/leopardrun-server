@@ -24,7 +24,7 @@ function Level() {
     var _createLevelPart = function () {
         var result = [];
         // generate ground
-        for (var i = 0; i < 6; ++i) {
+        for (var i = 0; i < 28; ++i) {
             var groundHeight = _chance.integer({min: 0, max: 1});
             result.push({"type": "g", "x": i, "y": groundHeight})
             if (_chance.bool({likelihood: 30})) {

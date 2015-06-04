@@ -32,13 +32,22 @@ HashMap.prototype.each = function(callback){
     }
 };
 
-HashMap.prototype.remove = function(object){
+HashMap.prototype.removeObject = function(object){
     var that = this;
     this.each(function(i,key,value){
         if(object === value){
             that._dict.splice(i,1);
         }
     });
+};
+
+HashMap.prototype.removeKey = function(removekey){
+	var that = this;
+	this.each(function(i,key,value){
+		if(key === removekey){
+			that._dict.splice(i,1);
+		}
+	});
 };
 
 /**
