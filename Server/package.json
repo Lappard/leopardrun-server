@@ -8,6 +8,7 @@
     "nodemon": "~v1.3.7"
   },
   "dependencies": {
-    "chance": "^0.7.4"
+    "chance": "^0.7.4",
+    "jsonfile": "^2.2.1"
   }
 }

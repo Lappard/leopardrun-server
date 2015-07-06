@@ -1,5 +1,6 @@
 'use strict';
 
+
 function Player(socket, guid) {
     var _position = null,
         _name = 'unnamed',
@@ -11,7 +12,8 @@ function Player(socket, guid) {
         _active = true,
         _self = this,
         _level = null,
-        _lastData = null;
+        _lastData = null,
+        _persistanceManager = require("./PersistanceManager");
 
     _socket.on('message', function (data) {
         try {
@@ -25,6 +27,16 @@ function Player(socket, guid) {
                         break;
                     case "createLevel":
                         _self.generateLevel();
+                        break;
+                    case "submitScore":
+                        break;
+
+                    case "getSaveGames":
+                        _self.getSaveGames()
+                        break;
+
+                    case "saveGame":
+                        _self.saveGame(_lastData.gameData);
                         break;
                 }
             }
@@ -40,8 +52,27 @@ function Player(socket, guid) {
     _socket.on('close', function () {
         //TODO: handle reconnection
         _active = false;
-        _eventStream.emit('remove-player',_guid);
+        _eventStream.emit('remove-player', _guid);
     });
+
+    this.getSaveGames = function () {
+        _persistanceManager.getAllSaveGames(function (games) {
+            _self.send(games);
+        });
+    }
+
+    this.saveGame = function (data) {
+        if (data.GameName && data.Owner && data.Level && data.Actions && data.Date && data.PlayerScore) {
+            _persistanceManager.saveGame(data);
+        } else {
+            var result = {
+                Error:"missing property!!!!"
+            };
+            _self.send(result)
+        }
+
+
+    }
 
 
     this.send = function (data) {

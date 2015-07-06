@@ -1,0 +1,18 @@
+[
+    {
+        "GameName": "test",
+        "Owner": "testowner",
+        "Level": "---level---",
+        "Actions": "---playerACTIONS——",
+        "Date": "ms since 1970",
+        "PlayerScore": 1337
+    },
+    {
+        "GameName": "Fuck",
+        "Owner": "scheißtyp",
+        "Level": "--level--",
+        "Actions": "---playerACTIONS——",
+        "date": "12321313242131",
+        "PlayerScore": 1234
+    }
+]
