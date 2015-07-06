@@ -31,3 +31,5 @@ node_modules
 .idea
 
 Server/cert/*.key
+Server/games
+Server/games/savegames.json
