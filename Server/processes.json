@@ -4,11 +4,9 @@
         {
             "name"        : "Leopartrun Server",
             "script"      : "server.js",
-            "args"        : ["--toto=heya coco", "-d", "1"],
             "watch"       : true,
-            "node_args"   : "--harmony",
             "merge_logs"  : true,
-           "ignore_watch" : ["games/**", "node_modules"]
+            "ignore_watch" : ["games", "node_modules"]
         }
     ]
 }
