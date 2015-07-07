@@ -35,7 +35,7 @@ var PersistanceManager = function PersistanceManager() {
      * @param callback
      */
     this.getAllSaveGames = function (callback) {
-        checkSaveGameFile()
+        checkSaveGameFile();
         var file = __dirname + '/games/savegames.json';
         jsonfile.readFile(file, function (err, obj) {
             console.dir(obj);
@@ -48,6 +48,7 @@ var PersistanceManager = function PersistanceManager() {
      * @param newGame
      */
     this.saveGame = function (newGame) {
+        checkSaveGameFile();
         var file = __dirname + '/games/savegames.json';
         jsonfile.readFile(file, function (err, obj) {
             if (Object.prototype.toString.call(obj) !== '[object Array]') {
