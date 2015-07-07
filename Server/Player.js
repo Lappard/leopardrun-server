@@ -42,13 +42,10 @@ function Player(socket, guid) {
                         break;
                 }
             }
-            //_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
         } catch (e) {
             var x = e;
-            //data is not a object send string then..
-            //_eventStream.emit('leopart-broadcast', {sender: _self, message:data});
+            console.log(e)
         }
-
     });
 
     _socket.on('close', function () {
