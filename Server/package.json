@@ -1,6 +1,7 @@
 {
   "name": "lappartserver",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "author": "Jonathan Wiemers",
   "devDependencies": {
     "grunt": "~0.4.2",
     "ws": "~0.7.1",

@@ -1,5 +1,8 @@
-'use strict';
+/**
+ * @author Jonathan Wiemers
+ */
 
+'use strict';
 /**
  * simple hashmap implementation
  * 

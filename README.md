@@ -4,14 +4,15 @@
 Server URL: ws://jonathanwiemers.de:1337
 ```
 
-## installing
+## using
 
 ```
 cd Server
-node install
-// get ssl.key by asking ;)
-cd ..
-node server.js
-//or (for run in background)
-node_modules/pm2/bin/pm2 start --watch server.js
+node install && node update
+node_modules/pm2/bin/pm2 start processes.json
+```
+
+## local useage
+```
+Server URL: ws://localhost:1337
 ```

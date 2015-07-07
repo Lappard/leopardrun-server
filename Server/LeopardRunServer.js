@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan Wiemers
+ */
+
 'use strict';
 var HashMap = require('./Util/HashMap'),
  	Player = require('./Player'),

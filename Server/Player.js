@@ -1,6 +1,8 @@
+/**
+ * @author Jonathan Wiemers
+ */
+
 'use strict';
-
-
 function Player(socket, guid) {
     var _position = null,
         _name = 'unnamed',
@@ -32,7 +34,7 @@ function Player(socket, guid) {
                         break;
 
                     case "getSaveGames":
-                        _self.getSaveGames()
+                        _self.getSaveGames();
                         break;
 
                     case "saveGame":

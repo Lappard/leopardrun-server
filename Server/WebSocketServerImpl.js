@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan Wiemers
+ */
+
 'use strict';
 var fs = require('fs');
 function WebSocketServerImpl() {
