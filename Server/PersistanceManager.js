@@ -18,6 +18,9 @@ var PersistanceManager = function PersistanceManager() {
      */
     var checkSaveGameFile = function () {
         fs.readFile(__dirname + '/games/savegames.json', 'utf8', function (err, data) {
+            fs.mkdir(__dirname + '/games', function (err) {
+                console.log(err);
+            });
             if (data == undefined) {
                 fs.writeFile(__dirname + '/games/savegames.json', [], 'utf8', function (err) {
                     console.log(err);
