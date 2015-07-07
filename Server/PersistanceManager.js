@@ -19,11 +19,11 @@ var PersistanceManager = function PersistanceManager() {
     var checkSaveGameFile = function () {
         fs.readFile(__dirname + '/games/savegames.json', 'utf8', function (err, data) {
             fs.mkdir(__dirname + '/games', function (err) {
-                console.log(err);
+                //console.log(err);
             });
             if (data == undefined) {
                 fs.writeFile(__dirname + '/games/savegames.json', [], 'utf8', function (err) {
-                    console.log(err);
+                    //console.log(err);
                 });
             }
         });
@@ -38,7 +38,7 @@ var PersistanceManager = function PersistanceManager() {
         checkSaveGameFile();
         var file = __dirname + '/games/savegames.json';
         jsonfile.readFile(file, function (err, obj) {
-            console.dir(obj);
+            //console.dir(obj);
             callback(obj);
         });
     };
@@ -56,7 +56,7 @@ var PersistanceManager = function PersistanceManager() {
             }
             obj.push(newGame);
             jsonfile.writeFile(file, obj, function (err) {
-                console.error(err)
+                //console.error(err)
             })
         });
     };
