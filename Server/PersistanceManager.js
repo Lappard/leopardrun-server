@@ -10,6 +10,7 @@ var PersistanceManager = function PersistanceManager() {
     var jsonfile = require('jsonfile'),
         util = require('util'),
         fs = require('fs'),
+        _file = __dirname + '/games/savegames.json',
         _self = this;
     jsonfile.spaces = 4;
 
@@ -23,7 +24,7 @@ var PersistanceManager = function PersistanceManager() {
                 //console.log(err);
             });
             if (data == undefined) {
-                fs.writeFile(__dirname + '/games/savegames.json', [], 'utf8', function (err) {
+                fs.writeFile(_file, [], 'utf8', function (err) {
                     //console.log(err);
                 });
             }
@@ -31,7 +32,7 @@ var PersistanceManager = function PersistanceManager() {
     };
 
     /**
-     * returns sorted and truncated (10) array
+     * truncate savegames file to 10 games and save the file back to the file system
      *
      * @param obj savegames
      * @returns {array}
@@ -41,6 +42,9 @@ var PersistanceManager = function PersistanceManager() {
             var result = [];
             obj.sort(function(a, b){return parseInt(b.PlayerScore) -  parseInt(a.PlayerScore)});
             obj = obj.splice(0,10);
+            jsonfile.writeFile(_file, obj, function (err) {
+                console.error(err)
+            });
         }
         return obj;
     };
@@ -52,8 +56,7 @@ var PersistanceManager = function PersistanceManager() {
      */
     this.getAllSaveGames = function (callback) {
         checkSaveGameFile();
-        var file = __dirname + '/games/savegames.json';
-        jsonfile.readFile(file, function (err, obj) {
+        jsonfile.readFile(_file, function (err, obj) {
             obj = checkForGameAmount(obj);
             callback(obj);
         });
@@ -65,16 +68,12 @@ var PersistanceManager = function PersistanceManager() {
      */
     this.saveGame = function (newGame) {
         checkSaveGameFile();
-        var file = __dirname + '/games/savegames.json';
-        jsonfile.readFile(file, function (err, obj) {
+        jsonfile.readFile(_file, function (err, obj) {
             if (Object.prototype.toString.call(obj) !== '[object Array]') {
                 obj = [];
             }
-            obj = checkForGameAmount(obj);
             obj.push(newGame);
-            jsonfile.writeFile(file, obj, function (err) {
-                //console.error(err)
-            })
+            obj = checkForGameAmount(obj);
         });
     };
 };
