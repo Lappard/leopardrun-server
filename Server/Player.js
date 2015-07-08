@@ -56,22 +56,28 @@ function Player(socket, guid) {
 
     this.getSaveGames = function () {
         _persistanceManager.getAllSaveGames(function (games) {
-            _self.send(games);
+            _lastData.process = {
+                Games:games
+            };
+            _self.send(_lastData);
         });
-    }
+    };
 
     this.saveGame = function (data) {
         if (data.GameName && data.Owner && data.Level && data.Actions && data.Date && data.PlayerScore) {
             _persistanceManager.saveGame(data);
-        } else {
-            var result = {
-                Error:"missing property!!!!"
+            _lastData.process = {
+                Status:"Game Saved!"
             };
-            _self.send(result)
+        } else {
+            _lastData.process = {
+                Error:"missing property!!!!",
+                Status:"Error"
+            };
         }
+        _self.send(_lastData)
 
-
-    }
+    };
 
 
     this.send = function (data) {
