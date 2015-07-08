@@ -7,9 +7,10 @@
 var PersistanceManager = function PersistanceManager() {
 
 
-    var jsonfile = require('jsonfile');
-    var util = require('util');
-    var fs = require('fs');
+    var jsonfile = require('jsonfile'),
+        util = require('util'),
+        fs = require('fs'),
+        _self = this;
     jsonfile.spaces = 4;
 
 
@@ -29,6 +30,21 @@ var PersistanceManager = function PersistanceManager() {
         });
     };
 
+    /**
+     * returns sorted and truncated (10) array
+     *
+     * @param obj savegames
+     * @returns {array}
+     */
+    var checkForGameAmount = function (obj) {
+        if(obj.length >= 10){
+            var result = [];
+            obj.sort(function(a, b){return parseInt(b.PlayerScore) -  parseInt(a.PlayerScore)});
+            obj = obj.splice(0,10);
+        }
+        return obj;
+    };
+
 
     /**
      * read all savegems from filesystem
@@ -38,7 +54,7 @@ var PersistanceManager = function PersistanceManager() {
         checkSaveGameFile();
         var file = __dirname + '/games/savegames.json';
         jsonfile.readFile(file, function (err, obj) {
-            //console.dir(obj);
+            obj = checkForGameAmount(obj);
             callback(obj);
         });
     };
@@ -54,6 +70,7 @@ var PersistanceManager = function PersistanceManager() {
             if (Object.prototype.toString.call(obj) !== '[object Array]') {
                 obj = [];
             }
+            obj = checkForGameAmount(obj);
             obj.push(newGame);
             jsonfile.writeFile(file, obj, function (err) {
                 //console.error(err)
