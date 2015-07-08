@@ -42,10 +42,10 @@ var PersistanceManager = function PersistanceManager() {
             var result = [];
             obj.sort(function(a, b){return parseInt(b.PlayerScore) -  parseInt(a.PlayerScore)});
             obj = obj.splice(0,10);
-            jsonfile.writeFile(_file, obj, function (err) {
-                console.error(err)
-            });
         }
+        jsonfile.writeFile(_file, obj, function (err) {
+            console.error(err)
+        });
         return obj;
     };
 
