@@ -57,21 +57,21 @@ function Player(socket, guid) {
     this.getSaveGames = function () {
         _persistanceManager.getAllSaveGames(function (games) {
             _lastData.process = {
-                Games:games
+                games:games
             };
             _self.send(_lastData);
         });
     };
 
     this.saveGame = function (data) {
-        if (data.GameName && data.Owner && data.Level && data.Actions && data.Date && data.PlayerScore) {
+        if (data.gameName && data.owner && data.level && data.actions && data.date && data.playerScore) {
             _persistanceManager.saveGame(data);
             _lastData.process = {
                 Status:"Game Saved!"
             };
         } else {
             _lastData.process = {
-                Error:"missing property!!!!",
+                Error:"Missing property!!!!",
                 Status:"Error"
             };
         }
