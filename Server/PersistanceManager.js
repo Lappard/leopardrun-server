@@ -40,7 +40,7 @@ var PersistanceManager = function PersistanceManager() {
     var checkForGameAmount = function (obj) {
         if(obj.length >= 10){
             var result = [];
-            obj.sort(function(a, b){return parseInt(b.PlayerScore) -  parseInt(a.PlayerScore)});
+            obj.sort(function(a, b){return (parseInt(b.PlayerScore) -  parseInt(a.PlayerScore))});
             obj = obj.splice(0,10);
         }
         jsonfile.writeFile(_file, obj, function (err) {
@@ -57,7 +57,6 @@ var PersistanceManager = function PersistanceManager() {
     this.getAllSaveGames = function (callback) {
         checkSaveGameFile();
         jsonfile.readFile(_file, function (err, obj) {
-            obj = checkForGameAmount(obj);
             callback(obj);
         });
     };
