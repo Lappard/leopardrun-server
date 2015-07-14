@@ -34,6 +34,12 @@ function Level() {
             if (_chance.bool({likelihood: 30})) {
                 result.push({"type": "b", "x": i, "y": _chance.integer({min: groundHeight + 1, max: 3})});
             }
+            if (_chance.bool({likelihood: 5})) {
+                result.push({"type": "f", "x": i, "y": _chance.integer({min: groundHeight + 1, max: 3})});
+            }
+            if (_chance.bool({likelihood: 15})) {
+                result.push({"type": "c", "x": i, "y": _chance.integer({min: groundHeight + 1, max: 3})});
+            }
         }
         _level.push(result);
         return result;
